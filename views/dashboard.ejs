@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>usermanagement</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="width: 100vw;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/adminpage">Home</a>
+                    </li>
+                    <a href="/displayissue">
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-primary position-relative">
+                                Issues
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    <%= count %>
+                                </span>
+                            </button>
+                        </li>
+                    </a>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/adduser">Add User</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/addnotice">Add Notice</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/joinchatadmin">Join Chat</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Profile
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/logout">logout</a></li>
+
+                        </ul>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <% if (locals.sucess) { %>
+
+        <div class="alert alert-success" role="alert" id="successAlert">
+            <%= sucess %>
+        </div>
+        <% } %>
+
+            <div class="box" style="border: 2px solid black; width:100vw ; height: 100vh;display: flex;">
+
+                <div class="cont1"
+                    style="width: 20%; border: 2px solid cyan; height: 100vh;display: flex;flex-direction: column;justify-content: flex-start;align-items: center;text-align: center;">
+
+                    <div class="img mt-3">
+                        <img src="https://imgs.search.brave.com/HTUyKk8Vb_9hSWmylY1BXPS4eO5MdJpnjz-4Mx69OFY/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4t/aWNvbnMtcG5nLmZs/YXRpY29uLmNvbS8x/MjgvMzEzNS8zMTM1/NzE1LnBuZw"
+                            alt="" srcset="" style="margin-bottom: 25px;">
+                    </div>
+                    <div class="block"
+                        style=" width: 80%;height: 35px;margin-bottom: 10px;margin-top: 10px;text-align: center;box-shadow: 5px 4px 6px rgba(0, 0, 0, 15.2);border: 3px solid blue;border-radius:15px">
+                        <% if (locals.name) { %>
+                            Name:- <%= name %>
+
+                                <% } %>
+                    </div>
+                    <div class="block"
+                        style=" width: 80%;height: 35px;margin-bottom: 10px;margin-top: 10px;box-shadow: 5px 4px 6px rgba(0, 0, 0, 15.2);border: 3px solid blue;border-radius:15px">
+                        <% if (locals.email) { %>
+                            E-Mail:- <%= email %>
+
+                                <% } %>
+                    </div>
+                    <div class="block"
+                        style=" width: 80%;height: 35px;margin-bottom: 10px;margin-top: 10px;box-shadow: 5px 4px 6px rgba(0, 0, 0, 15.2);border: 3px solid blue;border-radius:15px;overflow: auto;">
+                        <% if (locals.phoneno) { %>
+                            Phone No:- <%= phoneno %>
+
+                                <% } %>
+                    </div>
+                    <div class="block"
+                        style=" width: 80%;height: 35px;margin-bottom: 10px;margin-top: 10px;box-shadow: 5px 4px 6px rgba(0, 0, 0, 15.2);border: 3px solid blue;border-radius:15px">
+
+                        <% if (locals.address) { %>
+                            Address:- <%= address %>
+
+                                <% } %>
+                    </div>
+
+
+                </div>
+                <div class="cont2"
+                    style="width: 80%; border: 2px solid green; height: 100vh;display: flex; flex-direction: column;">
+                    <h3 style="text-align: center;">Users</h3>
+
+                    <% users.forEach(user=> { %>
+                        <div class="userpannel" style="display: flex;overflow: auto;">
+
+                            <div class="userdetail" style="border: 2px solid yellow; margin-top: 10px;margin-bottom: 10px;margin-left: 10px;margin-right: 10px;padding-left: 10px   ;width: 88%;border-radius: 15px;
+                        box-shadow: 2px 3px 6px rgba(0, 0, 0, 1.2);">
+                                Name:- <%= user.fname %>
+
+                            </div>
+
+                            <a href="/viewuserdetail/<%= user.fname %>" style="width: 28px;
+                        height: 28px;
+                        margin-top: 10px;margin-left: 15px;margin-right: 15px;">
+
+                                <img style="width: 28px;height: 28px;margin-left: -6px;"
+                                    src="https://img.icons8.com/ios-glyphs/30/visible--v1.png" alt="visible--v1" />
+
+                            </a>
+
+
+                            <a href="/edituserdetail/<%= user.fname %>" style="width: 28px;
+                        height: 28px;
+                        margin-top: 10px;">
+
+                                <img style="width: 28px;height: 28px;margin-left: -6px;"
+                                    src="https://img.icons8.com/wired/64/edit.png" alt="edit" />
+
+                            </a>
+
+                            <a href="/deleteuser/<%= user.fname %>" style="    width: 28px;
+                   height: 28px;
+                   margin-top: 10px;margin-left: 10px;">
+
+                                <img style="width: 28px;height: 28px;margin-left: -6px;"
+                                    src="https://img.icons8.com/plasticine/100/filled-trash.png" alt="filled-trash" />
+
+                            </a>
+
+                        </div>
+
+
+                        <% }) %>
+                </div>
+            </div>
+
+            </div>
+
+
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+                crossorigin="anonymous"></script>
+            <script>
+
+                setTimeout(function () {
+                    document.getElementById('successAlert').style.display = 'none';
+                }, 3000);
+
+
+                
+            </script>
+</body>
+
+</html>
